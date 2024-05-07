@@ -2,11 +2,11 @@ const perguntas = [
   {
     pergunta: "Qual é a forma correta de declarar uma variável em JavaScript?",
     respostas: [
-      "var myVar;",
       "let myVar;",
-      "const myVar;",
+      "new var myVar;",
+      "variable myVar;",
     ],
-    correta: 1
+    correta: 0
   },
   {
     pergunta: "Qual destes métodos é usado para adicionar um elemento ao final de um array?",
@@ -109,23 +109,40 @@ const perguntas = [
   },
 ];
 
+const respostasCorretas = new Set();
+const totalDePerguntas = perguntas.length;
+
 const quiz = document.querySelector('#quiz');
 const template = document.querySelector("template");
 for (const item of perguntas) {  
   const quizItem = template.content.cloneNode(true); // copia o que tem dentro da tag
   quizItem.querySelector('h3').textContent = item.pergunta;
-
-  for (const resposta of item.respostas) {
-    // procura dentro do dl, o dt
-    const dt = quizItem.querySelector('dl dt').cloneNode(true);
-    dt.querySelector('span').textContent = resposta;
-
-    quizItem.querySelector('dl').appendChild(dt);
-  }
-
+  dtBuild(item, quizItem);
   // remove item fixo do html
   quizItem.querySelector('dl dt').remove();
 
   quiz.appendChild(quizItem);
 }
 
+function dtBuild(item, quizItem) {
+  for (const resposta of item.respostas) {
+    // procura dentro do dl, o dt
+    const dt = quizItem.querySelector('dl dt').cloneNode(true);
+    dt.querySelector('span').textContent = resposta;
+    dt.querySelector('input').setAttribute('name', `pergunta-${perguntas.indexOf(item)}`);
+    dt.querySelector('input').value = item.respostas.indexOf(resposta);
+    dt.querySelector('input').onchange = (event) => {
+      respostasCorretas.delete(item);
+      if (event.target.value == item.correta) {
+        respostasCorretas.add(item);
+      }
+      atualizarAcertos();
+    }    
+    quizItem.querySelector('dl').appendChild(dt);    
+  }
+}
+
+function atualizarAcertos() {
+  const mostrarTotal = document.querySelector("#acertos span");
+  mostrarTotal.textContent = `${respostasCorretas.size} de ${totalDePerguntas}`;
+}
