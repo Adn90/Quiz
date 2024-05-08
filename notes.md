@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+```css
 
 *, :root {
   margin: 0;
@@ -14,50 +14,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-body {
-  background-color: #0F172A;
-}
-
-main {
-  max-width: 640px;
-  padding: 20px;
-  margin: 0 auto 64px;
-}
-
-header {
-  margin-top: 64px;
-  padding-bottom: 24px;
-  border-bottom: 1px solid #334155;
-}
-
-header h1 {
-  margin-top: 24px;
-  font-size: 30px;
-  color: #f1f5f9;
-}
-
-.quiz-item {
-  margin-top: 24px;
-  border: 1px solid #475569;
-  border-radius: 6px;
-}
-
-.quiz-item  h3 {
-  padding: 16px 20px;
-  color: #e2e8f0;
-}
-
-.quiz-item dl {
-  padding: 20px 24px;
-
-  display: grid;
-  gap: 8px;
-}
 
 .quiz-item dl dt {
   font-size: 14px;
   line-height: 24px;
-  
+
+  /* flex para alinhar e dar gap no input customizado */
   display: flex;
   align-items: center;
   gap: 8px;
@@ -74,15 +36,21 @@ input {
 
   border-radius: 50%;
 
+  /* deixar a seleção do radiobutton centralizada */
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+/* pseudo-selector -> elemento:pseudo-selector */
 input:checked {
   border: 1px solid #A3E635;
 }
 
+/* 
+  before insere algo antes de um elemento 
+  https://www.w3schools.com/cssref/sel_before.php
+*/
 input:checked:before {
   content: "";
   width: 10px;
@@ -92,14 +60,4 @@ input:checked:before {
   border-radius: 50%;
 }
 
-#acertos {
-  text-align: center;
-  background-color: #A3E635;
-
-  position: fixed;
-  bottom: 0;
-  left: 0;
-
-  width: 100%;
-  padding: 12px;
-}
+```
