@@ -14,6 +14,46 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+#quiz {
+  counter-reset: quiz-item;  /* prepara uma contagem dos elementos */
+}
+
+.quiz-item {
+  margin-top: 24px;
+  border: 1px solid #475569;
+  border-radius: 6px;
+
+  overflow: hidden; /* como pai, vai evitar que o background do h3 transborde da caixa */
+}
+
+.quiz-item  h3 {
+  padding: 16px 20px;
+  color: #e2e8f0;
+
+  /* ajutar a numeração das perguntas para ficar de lado do texto  */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  background-color: #e1293B;
+}
+
+.quiz-item  h3:before {
+  counter-increment: quiz-item;/* incremento do counter-reset*/
+  content: counter(quiz-item);/* coloca antes das perguntas o número ** */
+
+  background-color: #475569;
+  width: 28px;
+  height: 28px;
+  font-size: 12px;
+  border-radius: 50%;
+
+  /* flex para deixar a numeração centralizada com background color  */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0; /* flex por padrão, vai achantando os elementos; Com esse valor, os lementos não vão ser achatados. */
+}
 
 .quiz-item dl dt {
   font-size: 14px;
@@ -48,6 +88,7 @@ input:checked {
 }
 
 /* 
+  **
   before insere algo antes de um elemento 
   https://www.w3schools.com/cssref/sel_before.php
 */
